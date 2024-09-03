@@ -18,7 +18,7 @@ export default function Index() {
       </View>
       <View>
         <TouchableOpacity style={style.button}>
-        <Link style={style.buttText} href={'/'}>Entrar</Link>
+        <Link style={style.buttText} href={'/logado'}>Entrar</Link>
         </TouchableOpacity>
         <Link style={{marginTop:10}} href={'/'}>Esqueceu sua Senha?</Link>
       </View>
