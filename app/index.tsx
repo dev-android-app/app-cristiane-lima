@@ -1,4 +1,5 @@
 import { Text, View, StyleSheet, TouchableOpacity, TextInput, Image} from "react-native";
+import { NavigationContainer } from '@react-navigation/native'
 import { Link } from "expo-router";
 
 export default function Index() {
@@ -17,13 +18,13 @@ export default function Index() {
       </View>
       <View>
         <TouchableOpacity style={style.button}>
-          <Text style={style.buttText}>Entrar</Text>
+        <Link style={style.buttText} href={'/'}>Entrar</Link>
         </TouchableOpacity>
         <Link style={{marginTop:10}} href={'/'}>Esqueceu sua Senha?</Link>
       </View>
       <View style={style.buttDown}>
       <TouchableOpacity style={style.button}>
-        <Text style={style.buttText}>Criar nova conta</Text>
+        <Link style={style.buttText} href={'/cadastro'}>Criar nova conta</Link>
       </TouchableOpacity>
       </View>
     </View>
