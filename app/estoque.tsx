@@ -6,63 +6,63 @@ import { Link } from "expo-router";
 const DATA = [
   {
     id: '1',
-    title: 'Cliente A',
+    title: 'Roupa A',
   },
   {
     id: '2',
-    title: 'Cliente B',
+    title: 'Roupa B',
   },
   {
     id: '3',
-    title: 'Cliente C',
+    title: 'Roupa C',
   },
   {
     id: '4',
-    title:'Cliente D'
+    title:'Roupa D'
   },
   {
     id:'5',
-    title:'Cliente E'
+    title:'Roupa E'
   },
   {
     id: '6',
-    title: 'Cliente F',
+    title: 'Roupa F',
   },
   {
     id: '7',
-    title: 'Cliente G',
+    title: 'Roupa G',
   },
   {
     id: '8',
-    title: 'Cliente H',
+    title: 'Roupa H',
   },
   {
     id: '9',
-    title:'Cliente I'
+    title:'Roupa I'
   },
   {
     id:'10',
-    title:'Cliente J'
+    title:'Roupa J'
   },
   {
     id: '11',
-    title: 'Cliente K',
+    title: 'Roupa K',
   },
   {
     id: '12',
-    title: 'Cliente L',
+    title: 'Roupa L',
   },
   {
     id: '13',
-    title: 'Cliente M',
+    title: 'Roupa M',
   },
   {
     id: '14',
-    title:'Cliente N'
+    title:'Roupa N'
   },
   {
     id:'15',
-    title:'Cliente O'
+    title:'Roupa O'
   }
 ];
 
@@ -82,17 +82,18 @@ export default function Index() {
     
     <SafeAreaView style={style.screen}>
       <View style={style.textInput}>
-        <TextInput style={style.inputText} placeholder="Pesquisar cliente..." placeholderTextColor={'#FFF'}>
+        <TextInput style={style.inputText} placeholder="Pesquisar roupa..." placeholderTextColor={'#FFF'}>
         </TextInput>
       </View>
       <TouchableOpacity style={style.button}>
-        <Link style={style.buttText} href={'/'}>Novo cliente...</Link>
+        <Link style={style.buttText} href={'/'}>Adicionar roupa...</Link>
         </TouchableOpacity>
       <FlatList
       data={DATA}
       renderItem={({item}) => <Item title={item.title}/>}
       keyExtractor={item => item.id}
       />
+
     </SafeAreaView>
   );
 }

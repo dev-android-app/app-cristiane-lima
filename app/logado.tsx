@@ -10,13 +10,13 @@ export default function Index() {
         <Image source={require('../components/images/logo.jpg')} style={style.image}></Image>
       <View>
         <TouchableOpacity style={style.button}>
-        <Link style={style.buttText} href={'/'}>Nova venda</Link>
+        <Link style={style.buttText} href={'/novavenda'}>Nova venda</Link>
         </TouchableOpacity>
         <TouchableOpacity style={style.button}>
         <Link style={style.buttText} href={'/'}>Vendas</Link>
         </TouchableOpacity>
         <TouchableOpacity style={style.button}>
-        <Link style={style.buttText} href={'/'}>Estoque</Link>
+        <Link style={style.buttText} href={'/estoque'}>Estoque</Link>
         </TouchableOpacity>
         <TouchableOpacity style={style.button}>
         <Link style={style.buttText} href={'/cliente'}>Clientes</Link>
