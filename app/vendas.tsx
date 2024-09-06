@@ -1,5 +1,4 @@
 import { Text, View, StyleSheet, TouchableOpacity, TextInput, Image} from "react-native";
-import { NavigationContainer } from '@react-navigation/native'
 import { Link } from "expo-router";
 
 export default function Index() {
@@ -10,18 +9,12 @@ export default function Index() {
         <Image source={require('../components/images/logo.jpg')} style={style.image}></Image>
       <View>
         <TouchableOpacity style={style.button}>
-        <Link style={style.buttText} href={'/novavenda'}>Nova venda</Link>
+        <Link style={style.buttText} href={'/controlevpagas'}>Pagas</Link>
         </TouchableOpacity>
         <TouchableOpacity style={style.button}>
-        <Link style={style.buttText} href={'/vendas'}>Vendas</Link>
+        <Link style={style.buttText} href={'/controlevnpagas'}>Nao pagas</Link>
         </TouchableOpacity>
-        <TouchableOpacity style={style.button}>
-        <Link style={style.buttText} href={'/estoque'}>Estoque</Link>
-        </TouchableOpacity>
-        <TouchableOpacity style={style.button}>
-        <Link style={style.buttText} href={'/cliente'}>Clientes</Link>
-        </TouchableOpacity>
-        <Link style={{marginTop:10, alignSelf:'center'}} href={'/'}>Logout</Link>
+        <Link style={{marginTop:10, alignSelf:'center'}} href={'/logado'}>Voltar</Link>
       </View>
     </View>
   );
