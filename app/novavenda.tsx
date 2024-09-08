@@ -29,10 +29,10 @@ export default function Index() {
         </TouchableOpacity>
         <Link style={{marginTop:"20%", alignSelf:'center'}} href={'/logado'}>voltar</Link>
       </View>
-      <Modal visible={modalCVisible} animationType='fade'>
+      <Modal visible={modalCVisible} animationType='fade' transparent={true}>
         <ModalC handleClose={()=>setModalCVisible(false)}/>
       </Modal>
-      <Modal visible={modalRVisible} animationType='fade'>
+      <Modal visible={modalRVisible} animationType='fade' transparent={true}>
         <ModalR handleClose={()=>setModalRVisible(false)}/>
       </Modal>
     </View>

@@ -1,5 +1,7 @@
-import { Text, View, StyleSheet, TouchableOpacity, FlatList, SafeAreaView, TextInput} from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity, FlatList, Modal, SafeAreaView, TextInput} from "react-native";
 import { NavigationContainer } from '@react-navigation/native'
+import {ModalNovoC} from '../components/modal/novocliente'
+import {useState} from 'react'
 import { Link } from "expo-router";
 
 
@@ -77,22 +79,25 @@ const Item = ({title}: ItemProps) =>(
 )
 
 export default function Index() {
+  const [modalNovoCVisible, setModalNovoCVisible] = useState(false);
   return (
-
     
     <SafeAreaView style={style.screen}>
       <View style={style.textInput}>
         <TextInput style={style.inputText} placeholder="Pesquisar cliente..." placeholderTextColor={'#FFF'}>
         </TextInput>
       </View>
-      <TouchableOpacity style={style.button}>
-        <Link style={style.buttText} href={'/'}>Novo cliente...</Link>
+      <TouchableOpacity style={style.button} onPress={()=>setModalNovoCVisible(true)}>
+        <Text style={style.buttText}>Novo cliente...</Text>
         </TouchableOpacity>
       <FlatList
       data={DATA}
       renderItem={({item}) => <Item title={item.title}/>}
       keyExtractor={item => item.id}
       />
+      <Modal visible={modalNovoCVisible} transparent={true}>
+        <ModalNovoC handleClose={()=>setModalNovoCVisible(false)}/>
+      </Modal>
     </SafeAreaView>
   );
 }
