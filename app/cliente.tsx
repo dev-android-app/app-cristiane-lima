@@ -1,85 +1,30 @@
 import { Text, View, StyleSheet, TouchableOpacity, FlatList, Modal, SafeAreaView, TextInput} from "react-native";
-import { NavigationContainer } from '@react-navigation/native'
-import {ModalNovoC} from '../components/modal/novocliente'
-import {useState} from 'react'
+import {ModalNovoC} from '../components/modal/novocliente';
+import {ModalEC} from '../components/modal/modalEC'
+import {useState} from 'react';
 import { Link } from "expo-router";
 
 
-const DATA = [
-  {
-    id: '1',
-    title: 'Cliente A',
-  },
-  {
-    id: '2',
-    title: 'Cliente B',
-  },
-  {
-    id: '3',
-    title: 'Cliente C',
-  },
-  {
-    id: '4',
-    title:'Cliente D'
-  },
-  {
-    id:'5',
-    title:'Cliente E'
-  },
-  {
-    id: '6',
-    title: 'Cliente F',
-  },
-  {
-    id: '7',
-    title: 'Cliente G',
-  },
-  {
-    id: '8',
-    title: 'Cliente H',
-  },
-  {
-    id: '9',
-    title:'Cliente I'
-  },
-  {
-    id:'10',
-    title:'Cliente J'
-  },
-  {
-    id: '11',
-    title: 'Cliente K',
-  },
-  {
-    id: '12',
-    title: 'Cliente L',
-  },
-  {
-    id: '13',
-    title: 'Cliente M',
-  },
-  {
-    id: '14',
-    title:'Cliente N'
-  },
-  {
-    id:'15',
-    title:'Cliente O'
-  }
-];
+const DATA = [];
+//fazer requisicao pro banco com axios por cliente e popular com for loop
+for(let i=0;i<15;i++){
+  DATA.push({id:`${i}`,title:`Cliente ${i}`})
+}
 
 type ItemProps = {title:string};
 
-const Item = ({title}: ItemProps) =>(
-  <View>
-    <TouchableOpacity style={style.button}>
-        <Link style={style.buttText} href={'/'}>{title}</Link>
-        </TouchableOpacity>
-  </View>
-)
-
 export default function Index() {
   const [modalNovoCVisible, setModalNovoCVisible] = useState(false);
+  const [modalECvisible, setModalECvisible] = useState(false);
+
+  const [nome, setNome] = useState("");
+  const Item = ({title}: ItemProps) =>(
+    <View>
+      <TouchableOpacity style={style.button} onPress={()=>setModalECvisible(true)}>
+          <Text style={style.buttText}>{title}</Text>
+          </TouchableOpacity>
+    </View>
+  )
   return (
     
     <SafeAreaView style={style.screen}>
@@ -97,6 +42,9 @@ export default function Index() {
       />
       <Modal visible={modalNovoCVisible} transparent={true}>
         <ModalNovoC handleClose={()=>setModalNovoCVisible(false)}/>
+      </Modal>
+      <Modal visible={modalECvisible} transparent={true}>
+        <ModalEC handleClose={()=>setModalECvisible(false)}/>
       </Modal>
     </SafeAreaView>
   );

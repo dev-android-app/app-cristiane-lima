@@ -1,70 +1,11 @@
 import { Text, View, StyleSheet, TouchableOpacity, FlatList, SafeAreaView, TextInput} from "react-native";
 import { NavigationContainer } from '@react-navigation/native'
 import { Link } from "expo-router";
-
-
-const DATA = [
-  {
-    id: '1',
-    title: 'Roupa A',
-  },
-  {
-    id: '2',
-    title: 'Roupa B',
-  },
-  {
-    id: '3',
-    title: 'Roupa C',
-  },
-  {
-    id: '4',
-    title:'Roupa D'
-  },
-  {
-    id:'5',
-    title:'Roupa E'
-  },
-  {
-    id: '6',
-    title: 'Roupa F',
-  },
-  {
-    id: '7',
-    title: 'Roupa G',
-  },
-  {
-    id: '8',
-    title: 'Roupa H',
-  },
-  {
-    id: '9',
-    title:'Roupa I'
-  },
-  {
-    id:'10',
-    title:'Roupa J'
-  },
-  {
-    id: '11',
-    title: 'Roupa K',
-  },
-  {
-    id: '12',
-    title: 'Roupa L',
-  },
-  {
-    id: '13',
-    title: 'Roupa M',
-  },
-  {
-    id: '14',
-    title:'Roupa N'
-  },
-  {
-    id:'15',
-    title:'Roupa O'
-  }
-];
+const DATA = [];
+//fazer requisicao pro banco com axios por cliente e popular com for loop
+for(let i=0;i<15;i++){
+  DATA.push({id:`${i}`,title:`Roupa ${i}`})
+}
 
 type ItemProps = {title:string};
 
