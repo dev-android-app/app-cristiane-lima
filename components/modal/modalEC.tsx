@@ -1,7 +1,8 @@
 import { View, Text, StyleSheet, Button, TouchableOpacity, FlatList, TextInput } from 'react-native';
 import {useState} from 'react';
 export function ModalEC({handleClose}) {
-    const [value, setValue] = useState("");
+
+
   return (
     <View style={styles.screen}>
         <View style={styles.content}>

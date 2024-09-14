@@ -1,7 +1,24 @@
 import { Text, View, StyleSheet, TouchableOpacity, TextInput, Image} from "react-native";
 import { Link } from "expo-router";
+import {useState} from 'react';
+import axios from "axios";
 
 export default function Index() {
+  const [user, setUser] = useState("");
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
+
+  const postFunc = async()=>{
+    const body = JSON.stringify({user:user, email:email, pass:pass});
+
+    axios.post('http://192.168.0.103:8080/post',body,{
+      "headers":{
+        'Content-Type':'application/json'
+      }
+    }).then(function(response){
+      console.log(response);
+    }).catch(function(error){console.log(error);});
+  }
   return (
     <View
       style={style.screen}
@@ -10,21 +27,21 @@ export default function Index() {
         <Text style={style.titletext}>Usuario:</Text>
         </View>
         <View style={style.textInput}>
-        <TextInput style={style.inputText}>
+        <TextInput value={user} style={style.inputText} onChangeText={setUser}>
         </TextInput>
         </View>
         <View style={style.offset}>
         <Text style={style.titletext}>Email:</Text>
         </View>
         <View style={style.textInput}>
-        <TextInput style={style.inputText}>
+        <TextInput value={email} onChangeText={setEmail} style={style.inputText}>
         </TextInput>
         </View>
         <View style={style.offset}>
         <Text style={style.titletext}>Senha:</Text>
         </View>
       <View style={style.textInput}>
-        <TextInput style={style.inputText}>
+        <TextInput value={pass} onChangeText={setPass} style={style.inputText}>
         </TextInput>
         </View>
         <View style={style.offset}>
@@ -34,7 +51,7 @@ export default function Index() {
         <TextInput style={style.inputText}>
         </TextInput>
       </View>
-      <TouchableOpacity style={style.button}>
+      <TouchableOpacity onPress={postFunc} style={style.button}>
           <Text style={style.buttText}>Registrar</Text>
         </TouchableOpacity>
         <Link style={{marginTop:10}} href={'/'}>Voltar</Link>

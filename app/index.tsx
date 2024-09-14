@@ -1,19 +1,23 @@
 import { Text, View, StyleSheet, TouchableOpacity, TextInput, Image} from "react-native";
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native';
+import {useState} from 'react';
 import { Link } from "expo-router";
+import axios from "axios";
 
 export default function Index() {
+  const [user, setUser] = useState("");
+  const [pass, setPass] = useState("");
   return (
     <View
       style={style.screen}
     >
       <Image source={require('../components/images/logo.jpg')} style={style.image}></Image>
       <View style={style.textInput}>
-        <TextInput style={style.inputText} placeholder="Email..." placeholderTextColor={'#FFF'}>
+        <TextInput style={style.inputText} value={user} onChangeText={setUser} placeholder="Email..." placeholderTextColor={'#FFF'}>
         </TextInput>
         </View>
         <View style={style.textInput}>
-        <TextInput style={style.inputText} placeholder="Senha..." placeholderTextColor={'#FFF'}>
+        <TextInput style={style.inputText} value={pass} onChangeText={setPass} placeholder="Senha..." placeholderTextColor={'#FFF'}>
         </TextInput>
       </View>
       <View>
