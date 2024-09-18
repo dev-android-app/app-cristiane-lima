@@ -1,19 +1,33 @@
 import { View, Text, StyleSheet, Button, TouchableOpacity, FlatList, TextInput } from 'react-native';
-
+import{useState} from 'react';
+import axios from 'axios';
 export function ModalNovoC({handleClose}) {
+  const [nome, setNome] = useState("");
+  const [cpf, setCpf] = useState("");
+  const postFunc = async()=>{
+    const body = JSON.stringify({nome:nome, cpf:cpf});
+
+    axios.post('http://192.168.0.103:8080/ncliente',body,{
+      "headers":{
+        'Content-Type':'application/json'
+      }
+    }).then(function(response){
+      console.log(response);
+    }).catch(function(error){console.log(error);});
+  }
   return (
     <View style={styles.screen}>
         <View style={styles.content}>
         <Button title='X' onPress={handleClose} color={"#fb924e"}></Button>
         <View style={styles.textInput}>
-        <TextInput style={styles.inputText} placeholder="Nome..." placeholderTextColor={'#FFF'}>
+        <TextInput style={styles.inputText} value={nome} onChangeText={setNome} placeholder="Nome..." placeholderTextColor={'#FFF'}>
         </TextInput>
       </View>
       <View style={styles.textInput}>
-        <TextInput style={styles.inputText} placeholder="CPF..." placeholderTextColor={'#FFF'}>
+        <TextInput style={styles.inputText} value={cpf} onChangeText={setCpf} placeholder="CPF..." placeholderTextColor={'#FFF'}>
         </TextInput>
       </View>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={postFunc}>
         <Text style={styles.buttText}>Adicionar Cliente</Text>
       </TouchableOpacity>
         </View>
