@@ -2,8 +2,6 @@ import { Text, View, StyleSheet, TouchableOpacity, FlatList, Modal, SafeAreaView
 import {ModalNovoC} from '../components/modal/novocliente';
 import {ModalEC} from '../components/modal/modalEC'
 import {useState} from 'react';
-import { Link } from "expo-router";
-
 
 const DATA = [];
 //fazer requisicao pro banco com axios por cliente e popular com for loop

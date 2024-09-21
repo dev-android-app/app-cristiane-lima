@@ -1,5 +1,6 @@
-import { Text, View, StyleSheet, TouchableOpacity, FlatList, SafeAreaView, TextInput} from "react-native";
-import { NavigationContainer } from '@react-navigation/native'
+import { Text, View, StyleSheet, TouchableOpacity, FlatList, SafeAreaView, TextInput, Modal} from "react-native";
+import { ModalNovaR } from '../components/modal/novaroupa'
+import { useState } from 'react'
 import { Link } from "expo-router";
 const DATA = [];
 //fazer requisicao pro banco com axios por cliente e popular com for loop
@@ -18,6 +19,7 @@ const Item = ({title}: ItemProps) =>(
 )
 
 export default function Index() {
+const [modalVis, setModalVis] = useState(false);
   return (
 
     
@@ -26,14 +28,17 @@ export default function Index() {
         <TextInput style={style.inputText} placeholder="Pesquisar roupa..." placeholderTextColor={'#FFF'}>
         </TextInput>
       </View>
-      <TouchableOpacity style={style.button}>
-        <Link style={style.buttText} href={'/'}>Adicionar roupa...</Link>
+      <TouchableOpacity style={style.button} onPress={()=>setModalVis(true)}>
+        <Text style={style.buttText}>Adicionar roupa...</Text>
         </TouchableOpacity>
       <FlatList
       data={DATA}
       renderItem={({item}) => <Item title={item.title}/>}
       keyExtractor={item => item.id}
       />
+      <Modal visible={modalVis} transparent={true}>
+        <ModalNovaR handleClose={setModalVis}/>
+      </Modal>
 
     </SafeAreaView>
   );

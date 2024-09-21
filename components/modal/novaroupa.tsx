@@ -1,13 +1,13 @@
 import { View, Text, StyleSheet, Button, TouchableOpacity, FlatList, TextInput } from 'react-native';
 import{useState} from 'react';
 import axios from 'axios';
-export function ModalNovoC({handleClose}) {
+export function ModalNovaR({handleClose}) {
   const [nome, setNome] = useState("");
-  const [cpf, setCpf] = useState("");
+  const [custo, setCusto] = useState("");
   const postFunc = async()=>{
-    const body = JSON.stringify({nome:nome, cpf:cpf});
+    const body = JSON.stringify({nome:nome, custo:custo});
 
-    axios.post('http://192.168.242.71:8080/ncliente',body,{
+    axios.post('http://192.168.1.14:8080/nroupa',body,{
       "headers":{
         'Content-Type':'application/json'
       }
@@ -24,11 +24,11 @@ export function ModalNovoC({handleClose}) {
         </TextInput>
       </View>
       <View style={styles.textInput}>
-        <TextInput style={styles.inputText} value={cpf} onChangeText={setCpf} placeholder="CPF..." placeholderTextColor={'#FFF'}>
+        <TextInput style={styles.inputText} value={custo} onChangeText={setCusto} placeholder="Custo..." placeholderTextColor={'#FFF'}>
         </TextInput>
       </View>
       <TouchableOpacity style={styles.button} onPress={postFunc}>
-        <Text style={styles.buttText}>Adicionar Cliente</Text>
+        <Text style={styles.buttText}>Adicionar Roupa</Text>
       </TouchableOpacity>
         </View>
     </View>

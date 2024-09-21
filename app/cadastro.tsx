@@ -11,7 +11,7 @@ export default function Index() {
   const postFunc = async()=>{
     const body = JSON.stringify({user:user, email:email, pass:pass});
 
-    axios.post('http://192.168.0.103:8080/post',body,{
+    axios.post('http://192.168.242.71:8080/post',body,{
       "headers":{
         'Content-Type':'application/json'
       }
