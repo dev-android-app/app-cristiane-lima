@@ -1,19 +1,9 @@
 import { View, Text, StyleSheet, Button, TouchableOpacity, FlatList, TextInput } from 'react-native';
 import{useState} from 'react';
-import axios from 'axios';
 export function ModalNovoC({handleClose}) {
   const [nome, setNome] = useState("");
   const [cpf, setCpf] = useState("");
   const postFunc = async()=>{
-    const body = JSON.stringify({nome:nome, cpf:cpf});
-
-    axios.post('http://192.168.242.71:8080/ncliente',body,{
-      "headers":{
-        'Content-Type':'application/json'
-      }
-    }).then(function(response){
-      console.log(response);
-    }).catch(function(error){console.log(error);});
   }
   return (
     <View style={styles.screen}>

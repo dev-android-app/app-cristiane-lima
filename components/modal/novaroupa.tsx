@@ -1,19 +1,14 @@
 import { View, Text, StyleSheet, Button, TouchableOpacity, FlatList, TextInput } from 'react-native';
 import{useState} from 'react';
-import axios from 'axios';
+import * as db from '../bd/bd.js'
 export function ModalNovaR({handleClose}) {
   const [nome, setNome] = useState("");
   const [custo, setCusto] = useState("");
+  const [qntd, setQntd] = useState(0);
   const postFunc = async()=>{
-    const body = JSON.stringify({nome:nome, custo:custo});
-
-    axios.post('http://192.168.1.14:8080/nroupa',body,{
-      "headers":{
-        'Content-Type':'application/json'
-      }
-    }).then(function(response){
-      console.log(response);
-    }).catch(function(error){console.log(error);});
+    db.addRoupa(nome, qntd, custo);
+    let a = db.getRoupas();
+    console.log(await a);
   }
   return (
     <View style={styles.screen}>
@@ -25,6 +20,10 @@ export function ModalNovaR({handleClose}) {
       </View>
       <View style={styles.textInput}>
         <TextInput style={styles.inputText} value={custo} onChangeText={setCusto} placeholder="Custo..." placeholderTextColor={'#FFF'}>
+        </TextInput>
+      </View>
+      <View style={styles.textInput}>
+        <TextInput style={styles.inputText} value={qntd} onChangeText={setQntd} placeholder="qntd..." placeholderTextColor={'#FFF'}>
         </TextInput>
       </View>
       <TouchableOpacity style={styles.button} onPress={postFunc}>

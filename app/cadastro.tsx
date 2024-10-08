@@ -1,7 +1,6 @@
 import { Text, View, StyleSheet, TouchableOpacity, TextInput, Image} from "react-native";
 import { Link } from "expo-router";
 import {useState} from 'react';
-import axios from "axios";
 
 export default function Index() {
   const [user, setUser] = useState("");
@@ -9,15 +8,7 @@ export default function Index() {
   const [pass, setPass] = useState("");
 
   const postFunc = async()=>{
-    const body = JSON.stringify({user:user, email:email, pass:pass});
-
-    axios.post('http://192.168.242.71:8080/post',body,{
-      "headers":{
-        'Content-Type':'application/json'
-      }
-    }).then(function(response){
-      console.log(response);
-    }).catch(function(error){console.log(error);});
+    
   }
   return (
     <View
