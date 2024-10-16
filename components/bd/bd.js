@@ -21,6 +21,22 @@ export function getRoupas(){
         console.log(error);
     }
 }
+export function getEachRoupas(index){
+    try {
+        const str = db.getAllSync("SELECT * FROM roupas WHERE codigo=?",index);
+        return str;
+    } catch (error) {
+        console.log(error);
+    }
+}
+export function getLastRoupa(){
+    try {
+        const str = db.getAllSync("SELECT codigo FROM roupas ORDER BY codigo DESC LIMIT 1");
+        return str;
+    } catch (error) {
+        console.log(error);
+    }
+}
 export function reqres(){
     function delRoupa(nome){
         try {

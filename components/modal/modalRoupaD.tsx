@@ -1,35 +1,35 @@
 import { View, Text, StyleSheet, Button, TouchableOpacity, FlatList, TextInput } from 'react-native';
 import{useState} from 'react';
 import * as db from '../bd/bd.js'
-export function ModalNovaR({handleClose}) {
-
-  const [nome, setNome] = useState("");
-  const [custo, setCusto] = useState("");
-  const [qntd, setQntd] = useState(0);
-  const postFunc = async()=>{
-    db.addRoupa(nome, qntd, custo);
-    let a = db.getRoupas();
-    console.log(await a);
-  }
+export function ModalRoupaD({handleClose}, codigo) {
+  const [nome, setNome] = useState("abc");
+  const [custo, setCusto] = useState("29");
+  const [qntd, setQntd] = useState("6");
+  //const delete
+  let a = db.getEachRoupas(codigo);
+  console.log(a);
 
   return (
     <View style={styles.screen}>
         <View style={styles.content}>
         <Button title='X' onPress={handleClose} color={"#fb924e"}></Button>
         <View style={styles.textInput}>
-        <TextInput style={styles.inputText} value={nome} onChangeText={setNome} placeholder="Nome..." placeholderTextColor={'#FFF'}>
+        <TextInput style={styles.inputText} value={nome} onChangeText={setNome} placeholder={nome} placeholderTextColor={'#FFF'}>
         </TextInput>
       </View>
       <View style={styles.textInput}>
-        <TextInput style={styles.inputText} value={custo} onChangeText={setCusto} placeholder="Custo..." placeholderTextColor={'#FFF'}>
+        <TextInput style={styles.inputText} value={custo} onChangeText={setCusto} placeholder={custo} placeholderTextColor={'#FFF'}>
         </TextInput>
       </View>
       <View style={styles.textInput}>
-        <TextInput style={styles.inputText} value={qntd} onChangeText={setQntd} placeholder="qntd..." placeholderTextColor={'#FFF'}>
+        <TextInput style={styles.inputText} value={qntd} onChangeText={setQntd} placeholder={qntd} placeholderTextColor={'#FFF'}>
         </TextInput>
       </View>
-      <TouchableOpacity style={styles.button} onPress={postFunc}>
-        <Text style={styles.buttText}>Adicionar Roupa</Text>
+      <TouchableOpacity style={styles.button}>
+        <Text style={styles.buttText}>Alterar Roupa</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button}>
+        <Text style={styles.buttText}>Deletar Roupa</Text>
       </TouchableOpacity>
         </View>
     </View>

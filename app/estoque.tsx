@@ -1,25 +1,36 @@
 import { Text, View, StyleSheet, TouchableOpacity, FlatList, SafeAreaView, TextInput, Modal} from "react-native";
-import { ModalNovaR } from '../components/modal/novaroupa'
+import { ModalNovaR } from '../components/modal/novaroupa';
+import { ModalRoupaD } from '../components/modal/modalRoupaD';
 import { useState } from 'react'
 import { Link } from "expo-router";
+import * as db from '../components/bd/bd.js'
 const DATA = [];
 //fazer requisicao pro banco com axios por cliente e popular com for loop
-for(let i=0;i<15;i++){
-  DATA.push({id:`${i}`,title:`Roupa ${i}`})
-}
+let data = db.getLastRoupa();
+console.log(data[0].codigo);
+for(let i=1;i<=data[0].codigo;i++){
+    let a = db.getEachRoupas(i);
+    console.log(a);
+    DATA.push({id:`${a[0].codigo}` ,title:`${a[0].nome}`})
+  }
 
 type ItemProps = {title:string};
 
+export default function Index() {
+const [modalVis, setModalVis] = useState(false);
+const [modalEVis, setModalEVis] = useState(false);
+const [codigo, setCodigo] = useState(1);
+function EditModal(){
+  setModalEVis(true);
+  setCodigo(DATA[i].id);
+}
 const Item = ({title}: ItemProps) =>(
   <View>
-    <TouchableOpacity style={style.button}>
-        <Link style={style.buttText} href={'/'}>{title}</Link>
+    <TouchableOpacity style={style.button} onPress={EditModal}>
+        <Text style={style.buttText}>{title}</Text>
         </TouchableOpacity>
   </View>
 )
-
-export default function Index() {
-const [modalVis, setModalVis] = useState(false);
   return (
 
     
@@ -38,6 +49,9 @@ const [modalVis, setModalVis] = useState(false);
       />
       <Modal visible={modalVis} transparent={true}>
         <ModalNovaR handleClose={setModalVis}/>
+      </Modal>
+      <Modal visible={modalEVis} transparent={true}>
+    <ModalRoupaD handleClose={setModalEVis} codigo={codigo}/>
       </Modal>
 
     </SafeAreaView>
