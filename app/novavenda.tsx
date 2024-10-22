@@ -25,9 +25,9 @@ export default function Index() {
         </TouchableOpacity>
         <Text style={style.text}>DINHEIRO</Text>
         <TouchableOpacity style={style.buttonRecibo}>
-        <Link style={style.buttText} href={'/logado'}>Gerar recibo</Link>
+        <Link style={style.buttText} href={'/'}>Gerar recibo</Link>
         </TouchableOpacity>
-        <Link style={{marginTop:"20%", alignSelf:'center'}} href={'/logado'}>voltar</Link>
+        <Link style={{marginTop:"20%", alignSelf:'center'}} href={'/'}>voltar</Link>
       </View>
       <Modal visible={modalCVisible} animationType='fade' transparent={true}>
         <ModalC handleClose={()=>setModalCVisible(false)}/>

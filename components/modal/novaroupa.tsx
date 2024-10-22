@@ -9,7 +9,6 @@ export function ModalNovaR({handleClose}) {
   const postFunc = async()=>{
     db.addRoupa(nome, qntd, custo);
     let a = db.getRoupas();
-    console.log(await a);
   }
 
   return (

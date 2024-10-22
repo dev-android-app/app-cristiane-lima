@@ -1,13 +1,14 @@
 import { View, Text, StyleSheet, Button, TouchableOpacity, FlatList, TextInput } from 'react-native';
 import{useState} from 'react';
 import * as db from '../bd/bd.js'
-export function ModalRoupaD({handleClose}, codigo) {
-  const [nome, setNome] = useState("abc");
-  const [custo, setCusto] = useState("29");
-  const [qntd, setQntd] = useState("6");
+export function ModalRoupaD({handleClose},val) {
+  const [nome, setNome] = useState("");
+  const [custo, setCusto] = useState("");
+  const [qntd, setQntd] = useState("");
   //const delete
-  let a = db.getEachRoupas(codigo);
-  console.log(a);
+  let a = db.getEachRoupas(val);
+  console.log(val);
+ // console.log(a[0]);
 
   return (
     <View style={styles.screen}>

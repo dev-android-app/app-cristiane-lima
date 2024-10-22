@@ -1,16 +1,16 @@
 import { Text, View, StyleSheet, TouchableOpacity, FlatList, SafeAreaView, TextInput, Modal} from "react-native";
 import { ModalNovaR } from '../components/modal/novaroupa';
 import { ModalRoupaD } from '../components/modal/modalRoupaD';
-import { useState } from 'react'
+import { useState } from 'react';
 import { Link } from "expo-router";
-import * as db from '../components/bd/bd.js'
+import * as db from '../components/bd/bd.js';
+import { NativeModules } from "react-native";
 const DATA = [];
 //fazer requisicao pro banco com axios por cliente e popular com for loop
 let data = db.getLastRoupa();
 console.log(data[0].codigo);
 for(let i=1;i<=data[0].codigo;i++){
     let a = db.getEachRoupas(i);
-    console.log(a);
     DATA.push({id:`${a[0].codigo}` ,title:`${a[0].nome}`})
   }
 
@@ -19,14 +19,16 @@ type ItemProps = {title:string};
 export default function Index() {
 const [modalVis, setModalVis] = useState(false);
 const [modalEVis, setModalEVis] = useState(false);
-const [codigo, setCodigo] = useState(1);
-function EditModal(){
+const [codigo, setCodigo] = useState("");
+function getCodigo({title}){
+  let a = db.getEachRoupasNome(title);
+  console.log(a[0].codigo);
+  setCodigo(a[0].codigo);
   setModalEVis(true);
-  setCodigo(DATA[i].id);
 }
 const Item = ({title}: ItemProps) =>(
   <View>
-    <TouchableOpacity style={style.button} onPress={EditModal}>
+    <TouchableOpacity style={style.button} onPress={()=>getCodigo({title})}>
         <Text style={style.buttText}>{title}</Text>
         </TouchableOpacity>
   </View>
@@ -51,9 +53,11 @@ const Item = ({title}: ItemProps) =>(
         <ModalNovaR handleClose={setModalVis}/>
       </Modal>
       <Modal visible={modalEVis} transparent={true}>
-    <ModalRoupaD handleClose={setModalEVis} codigo={codigo}/>
+    <ModalRoupaD handleClose={setModalEVis} val={{codigo}}/>
       </Modal>
-
+      <TouchableOpacity onPress={()=>NativeModules.DevSettings.reload()}>
+        <Text>Recarregar</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }

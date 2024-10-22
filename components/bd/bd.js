@@ -29,6 +29,14 @@ export function getEachRoupas(index){
         console.log(error);
     }
 }
+export function getEachRoupasNome(index){
+    try {
+        const str = db.getAllSync("SELECT * FROM roupas WHERE nome=?",index);
+        return str;
+    } catch (error) {
+        console.log(error);
+    }
+}
 export function getLastRoupa(){
     try {
         const str = db.getAllSync("SELECT codigo FROM roupas ORDER BY codigo DESC LIMIT 1");
