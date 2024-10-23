@@ -7,8 +7,9 @@ export function ModalNovaR({handleClose}) {
   const [custo, setCusto] = useState("");
   const [qntd, setQntd] = useState(0);
   const postFunc = async()=>{
-    db.addRoupa(nome, qntd, custo);
+    db.addRoupa(nome);
     let a = db.getRoupas();
+    console.log(await a);
   }
 
   return (
@@ -17,14 +18,6 @@ export function ModalNovaR({handleClose}) {
         <Button title='X' onPress={handleClose} color={"#fb924e"}></Button>
         <View style={styles.textInput}>
         <TextInput style={styles.inputText} value={nome} onChangeText={setNome} placeholder="Nome..." placeholderTextColor={'#FFF'}>
-        </TextInput>
-      </View>
-      <View style={styles.textInput}>
-        <TextInput style={styles.inputText} value={custo} onChangeText={setCusto} placeholder="Custo..." placeholderTextColor={'#FFF'}>
-        </TextInput>
-      </View>
-      <View style={styles.textInput}>
-        <TextInput style={styles.inputText} value={qntd} onChangeText={setQntd} placeholder="qntd..." placeholderTextColor={'#FFF'}>
         </TextInput>
       </View>
       <TouchableOpacity style={styles.button} onPress={postFunc}>

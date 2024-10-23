@@ -8,11 +8,22 @@ import { NativeModules } from "react-native";
 const DATA = [];
 //fazer requisicao pro banco com axios por cliente e popular com for loop
 let data = db.getLastRoupa();
-console.log(data[0].codigo);
+//console.log(data[0].codigo);
 for(let i=1;i<=data[0].codigo;i++){
+  let a = db.getEachRoupas(i);
+  console.log(a[0]);
+  DATA.push({id:`${a[0].codigo}` ,title:`${a[0].nome}`})
+}
+  /**
+   *
+    for(let i=1;i<=2;i++){
     let a = db.getEachRoupas(i);
-    DATA.push({id:`${a[0].codigo}` ,title:`${a[0].nome}`})
+    console.log(a[0]);
+    DATA.push({id:`${i}` ,title:`erro${i}`})
   }
+   */
+ 
+
 
 type ItemProps = {title:string};
 
@@ -22,7 +33,6 @@ const [modalEVis, setModalEVis] = useState(false);
 const [codigo, setCodigo] = useState("");
 function getCodigo({title}){
   let a = db.getEachRoupasNome(title);
-  console.log(a[0].codigo);
   setCodigo(a[0].codigo);
   setModalEVis(true);
 }
@@ -53,7 +63,7 @@ const Item = ({title}: ItemProps) =>(
         <ModalNovaR handleClose={setModalVis}/>
       </Modal>
       <Modal visible={modalEVis} transparent={true}>
-    <ModalRoupaD handleClose={setModalEVis} val={{codigo}}/>
+    <ModalRoupaD handleClose={()=>setModalEVis(false)} value={codigo}/>
       </Modal>
       <TouchableOpacity onPress={()=>NativeModules.DevSettings.reload()}>
         <Text>Recarregar</Text>

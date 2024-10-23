@@ -3,12 +3,13 @@ const db = SQLite.openDatabaseSync('database');
     db.execSync(`
         PRAGMA journal_mode = WAL;
         CREATE TABLE IF NOT EXISTS clientes (id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT NOT NULL, cpf TEXT NOT NULL);
-        CREATE TABLE IF NOT EXISTS roupas (codigo INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT NOT NULL, qntd INTEGER NOT NULL, preco INTEGER NOT NULL);
-        CREATE TABLE IF NOT EXISTS vendas (transc INTEGER PRIMARY KEY AUTOINCREMENT, clientecpf TEXT NOT NULL, roupascodigos TEXT NOT NULL, valor INTEGER NOT NULL, status TEXT NOT NULL, metodopagamento TEXT NOT NULL )`);
+        CREATE TABLE IF NOT EXISTS roupas (codigo INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT NOT NULL);
+        CREATE TABLE IF NOT EXISTS vendas (transc INTEGER PRIMARY KEY AUTOINCREMENT, clientecpf TEXT NOT NULL, roupascodigos TEXT NOT NULL, valor INTEGER NOT NULL, status TEXT NOT NULL, metodopagamento TEXT NOT NULL );;
+     `);
     
-export function addRoupa(nome,qntd,custo){
+export function addRoupa(nome){
     try {
-        const str = db.getAllAsync("INSERT INTO roupas (nome, qntd, preco) VALUES(?,?,?)",nome, qntd, custo);
+        const str = db.getAllAsync("INSERT INTO roupas (nome) VALUES(?)",nome);
     } catch (err) {
         console.log(err);
     }
@@ -29,6 +30,20 @@ export function getEachRoupas(index){
         console.log(error);
     }
 }
+export function altRoupa(nome, codigo){
+ try {
+    const str = db.getAllSync("UPDATE roupas SET codigo=? nome=? WHERE codigo=?",codigo,nome,codigo);
+ } catch (error) {
+    console.log(error)
+ }
+}
+export function altCodiRoupa(val, nome){
+    try {
+        const str = db.getAllSync("UPDATE roupas SET codigo=? WHERE nome=?",val, nome)
+    } catch (error) {
+        console.log(error);
+    }
+}
 export function getEachRoupasNome(index){
     try {
         const str = db.getAllSync("SELECT * FROM roupas WHERE nome=?",index);
@@ -45,14 +60,14 @@ export function getLastRoupa(){
         console.log(error);
     }
 }
-export function reqres(){
-    function delRoupa(nome){
-        try {
-            const str = db.getAllAsync("DELETE FROM roupas WHERE nome=?",nome);
-        } catch (error) {
-            console.log(error);
-        }
+export function delRoupa(nome){
+    try {
+        const str = db.getAllAsync("DELETE FROM roupas WHERE nome=?",nome);
+    } catch (error) {
+        console.log(error);
     }
+}
+export function reqres(){
     function addCliente(nome, cpf){
         try {
             const str = db.getAllAsync("INSERT INTO clientes (nome, cpf) VALUES(?,?)",nome, cpf)
