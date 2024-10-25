@@ -2,11 +2,25 @@ import { Text, View, StyleSheet, TouchableOpacity, Modal} from "react-native";
 import {useState} from 'react';
 import { Link } from "expo-router";
 import { ModalC } from "../components/modal/index";
-import { ModalR } from "../components/modal/modalR"
+import { ModalR } from "../components/modal/modalR";
+import * as db from '../components/bd/bd.js';
+import { NativeModules } from "react-native";
 
 export default function Index() {
   const [modalCVisible, setModalCVisible] = useState(false);
   const [modalRVisible, setModalRVisible] = useState(false);
+  const [cpf, setCpf] = useState("11111111111");
+  const [roupas, setRoupas] = useState("camiseta.1,vestido.2,meias.3");
+  const [valor, setValor] = useState(180.00);
+  const [status, setStatus] = useState("pago");
+  const [metodo, setMetodo] = useState("din")
+  //clientecpf,roupascodigos,valor,status, metodopagamento
+  const addVenda = async()=>{
+    db.addVenda(cpf, roupas, valor, status, metodo);
+    let a = db.getVendas();
+    console.log(await a);
+    NativeModules.DevSettings.reload();
+  }
   return (
     <View
       style={style.screen}
@@ -15,17 +29,19 @@ export default function Index() {
         <TouchableOpacity style={style.button} onPress={()=>setModalCVisible(true)}>
         <Text style={style.buttText}>Selecionar Cliente</Text>
         </TouchableOpacity>
-        <Text style={style.text}>CLIENTE A</Text>
+        <Text style={style.text}>teste</Text>
         <TouchableOpacity style={style.button} onPress={()=>setModalRVisible(true)}>
         <Text style={style.buttText}>Selecionar Roupa</Text>
         </TouchableOpacity>
-        <Text style={style.text}>ROUPA A</Text>
+        <Text style={style.text}>vestido</Text>
         <TouchableOpacity style={style.button}>
         <Link style={style.buttText} href={'/pagamento'}>Forma de pagamento</Link>
         </TouchableOpacity>
         <Text style={style.text}>DINHEIRO</Text>
         <TouchableOpacity style={style.buttonRecibo}>
-        <Link style={style.buttText} href={'/'}>Gerar recibo</Link>
+        <Text style={style.buttText} onPress={()=>addVenda()}>
+        Gerar recibo
+        </Text>
         </TouchableOpacity>
         <Link style={{marginTop:"20%", alignSelf:'center'}} href={'/'}>voltar</Link>
       </View>

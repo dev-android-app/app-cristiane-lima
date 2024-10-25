@@ -1,12 +1,30 @@
 import { Text, View, StyleSheet, TouchableOpacity, FlatList, SafeAreaView, TextInput} from "react-native";
 import { NavigationContainer } from '@react-navigation/native'
 import { Link } from "expo-router";
+import * as db from '../components/bd/bd.js';
+import { NativeModules } from "react-native";
 
 
 const DATA = [];
 //fazer requisicao pro banco com axios por cliente e popular com for loop
-for(let i=0;i<15;i++){
-  DATA.push({id:`${i}`,title:`Venda ${i}`})
+let data = db.getLastVenda();
+//console.log(data[0].codigo);
+var obj = [];
+      let c = db.getLastVenda();
+      let b = db.getVendas();
+      let count = Object.keys(b).length;
+      for(let i=1;i<=c[0].transc;i++){
+        let h = db.getEachVendasPagas(i);
+        if(h[0]!=undefined){
+          obj.push({"transc":i,"clientecpf":h[0].transc});
+        }
+        //console.log(h[0].nome);
+      }
+      console.log(obj);
+for(let i=0;i<obj.length;i++){
+  let a = db.getEachVendasPagas(i);
+  //console.log(a[0]);
+  DATA.push({id:`${obj[i].transc}` ,title:`${obj[i].clientecpf}`})
 }
 
 type ItemProps = {title:string};

@@ -21,8 +21,7 @@ export default function Index() {
         <TouchableOpacity style={style.button}>
         <Link style={style.buttText} href={'/cliente'}>Clientes</Link>
         </TouchableOpacity>
-        <Link style={{marginTop:10, alignSelf:'center'}} href={'/'}>Logout</Link>
-      </View>
+        </View>
     </View>
   );
 }

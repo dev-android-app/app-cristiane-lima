@@ -6,13 +6,13 @@ export function ModalRoupaD({handleClose, value}) {
   const [nome, setNome] = useState("");
   //const delete
     let a = db.getEachRoupas(value);
-    console.log(a[0]);
-    console.log(nome);
+    //console.log(a[0]);
+    //console.log(nome);
     function carregarInfos(){
       let a = db.getEachRoupas(value);
-      console.log(a[0]);
+      //console.log(a[0]);
       setNome(a[0].nome);
-      console.log(nome);
+      //console.log(nome);
     }
     function deleteRoupa(){
       let a = db.getEachRoupas(value);
@@ -21,28 +21,27 @@ export function ModalRoupaD({handleClose, value}) {
       var obj = [];
       let c = db.getLastRoupa();
       let b = db.getRoupas();
-      let count = Object.keys(b).length -1;
+      let count = Object.keys(b).length;
       for(let i=1;i<=c[0].codigo;i++){
         let h = db.getEachRoupas(i);
-        console.log(h[0].nome);
+        //console.log(h[0].nome);
         obj.push({"codigo":i,"nome":h[0].nome});
       }
-      console.log(obj[2].nome);
-      for(let i=0;i<count;i++){
+      console.log(obj[0].nome);
+      for(let i=0;i<count-1;i++){
         //func mudar codigo
         db.altCodiRoupa(i+1, obj[i].nome);
       }
-      let g = db.getRoupas();
-      console.log(g[0]);
-      //NativeModules.DevSettings.reload();
+      //let g = db.getRoupas();
+      //console.log(g[0]);
+      NativeModules.DevSettings.reload();
     }
     function altRoupa(){
       let a = db.getEachRoupas(value);
 
       db.altRoupa(nome, a[0].codigo);
 
-      let b = db.getEachRoupas(value);
-      console.log(b[0]);
+      NativeModules.DevSettings.reload();
     }
   
   
@@ -53,10 +52,10 @@ export function ModalRoupaD({handleClose, value}) {
         <View style={styles.content}>
         <Button title='X' onPress={handleClose} color={"#fb924e"}></Button>
         <View style={styles.textInput}>
-        <TextInput style={styles.inputText} value={nome} onChangeText={()=>setNome()} placeholder={nome} placeholderTextColor={'#FFF'}>
+        <TextInput style={styles.inputText} value={nome} onChangeText={setNome} placeholder={nome} placeholderTextColor={'#FFF'}>
         </TextInput>
       </View>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={()=>altRoupa()}>
         <Text style={styles.buttText}>Alterar Roupa</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={()=>deleteRoupa()}>

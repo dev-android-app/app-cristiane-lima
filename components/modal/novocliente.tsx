@@ -1,9 +1,15 @@
 import { View, Text, StyleSheet, Button, TouchableOpacity, FlatList, TextInput } from 'react-native';
 import{useState} from 'react';
+import * as db from '../bd/bd.js';
+import { NativeModules } from "react-native";
 export function ModalNovoC({handleClose}) {
   const [nome, setNome] = useState("");
   const [cpf, setCpf] = useState("");
   const postFunc = async()=>{
+    db.addCliente(nome, cpf);
+    let a = db.getClientes();
+    console.log(await a);
+    NativeModules.DevSettings.reload();
   }
   return (
     <View style={styles.screen}>

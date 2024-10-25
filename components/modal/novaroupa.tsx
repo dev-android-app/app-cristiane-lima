@@ -1,15 +1,15 @@
-import { View, Text, StyleSheet, Button, TouchableOpacity, FlatList, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Button, TouchableOpacity, TextInput } from 'react-native';
 import{useState} from 'react';
 import * as db from '../bd/bd.js'
+import { NativeModules } from "react-native";
 export function ModalNovaR({handleClose}) {
 
   const [nome, setNome] = useState("");
-  const [custo, setCusto] = useState("");
-  const [qntd, setQntd] = useState(0);
   const postFunc = async()=>{
     db.addRoupa(nome);
     let a = db.getRoupas();
     console.log(await a);
+    NativeModules.DevSettings.reload();
   }
 
   return (
@@ -17,13 +17,15 @@ export function ModalNovaR({handleClose}) {
         <View style={styles.content}>
         <Button title='X' onPress={handleClose} color={"#fb924e"}></Button>
         <View style={styles.textInput}>
-        <TextInput style={styles.inputText} value={nome} onChangeText={setNome} placeholder="Nome..." placeholderTextColor={'#FFF'}>
+        <TextInput style={styles.inputText} value={nome} onChangeText={setNome} placeholder="Nome..." 
+        placeholderTextColor={'#FFF'}>
         </TextInput>
       </View>
       <TouchableOpacity style={styles.button} onPress={postFunc}>
         <Text style={styles.buttText}>Adicionar Roupa</Text>
       </TouchableOpacity>
         </View>
+    
     </View>
   )
 }

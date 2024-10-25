@@ -1,67 +1,24 @@
 import { View, Text, StyleSheet, Button, TouchableOpacity, FlatList, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-const DATA = [
-  {
-    id: '1',
-    title: 'Roupa A',
-  },
-  {
-    id: '2',
-    title: 'Roupa B',
-  },
-  {
-    id: '3',
-    title: 'Roupa C',
-  },
-  {
-    id: '4',
-    title: 'Roupa D'
-  },
-  {
-    id: '5',
-    title: 'Roupa E'
-  },
-  {
-    id: '6',
-    title: 'Roupa F',
-  },
-  {
-    id: '7',
-    title: 'Roupa G',
-  },
-  {
-    id: '8',
-    title: 'Roupa H',
-  },
-  {
-    id: '9',
-    title: 'Roupa I'
-  },
-  {
-    id: '10',
-    title: 'Roupa J'
-  },
-  {
-    id: '11',
-    title: 'Roupa K',
-  },
-  {
-    id: '12',
-    title: 'Roupa L',
-  },
-  {
-    id: '13',
-    title: 'Roupa M',
-  },
-  {
-    id: '14',
-    title: 'Roupa N'
-  },
-  {
-    id: '15',
-    title: 'Roupa O'
-  }
-];
+import * as db from '../bd/bd.js';
+const DATA = [];
+var obj = [];
+      let c = db.getLastRoupa();
+      let b = db.getRoupas();
+      let count = Object.keys(b).length;
+      for(let i=1;i<=c[0].codigo;i++){
+        let h = db.getEachRoupas(i);
+        if(h[0]!=undefined){
+          obj.push({"codigo":i,"nome":h[0].nome});
+        }
+        //console.log(h[0].nome);
+      }
+      console.log(obj);
+for(let i=0;i<obj.length;i++){
+  let a = db.getEachRoupas(i);
+  //console.log(a[0]);
+  DATA.push({id:`${obj[i].codigo}` ,title:`${obj[i].nome}`})
+}
 
 type ItemProps = { title: string };
 
@@ -80,7 +37,7 @@ export function ModalR({handleClose}) {
         <View style={styles.gencont}>
 
           <View style={styles.textInput}>
-            <TextInput style={styles.inputText} placeholder="Pesquisar venda..." placeholderTextColor={'#FFF'}>
+            <TextInput style={styles.inputText} placeholder="Pesquisar roupa..." placeholderTextColor={'#FFF'}>
             </TextInput>
           </View>
         

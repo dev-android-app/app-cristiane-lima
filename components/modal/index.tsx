@@ -1,78 +1,43 @@
 import { View, Text, StyleSheet, Button, TouchableOpacity, FlatList, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-const DATA = [
-  {
-    id: '1',
-    title: 'Cliente A',
-  },
-  {
-    id: '2',
-    title: 'Cliente B',
-  },
-  {
-    id: '3',
-    title: 'Cliente C',
-  },
-  {
-    id: '4',
-    title: 'Cliente D'
-  },
-  {
-    id: '5',
-    title: 'Cliente E'
-  },
-  {
-    id: '6',
-    title: 'Cliente F',
-  },
-  {
-    id: '7',
-    title: 'Cliente G',
-  },
-  {
-    id: '8',
-    title: 'Cliente H',
-  },
-  {
-    id: '9',
-    title: 'Cliente I'
-  },
-  {
-    id: '10',
-    title: 'Cliente J'
-  },
-  {
-    id: '11',
-    title: 'Cliente K',
-  },
-  {
-    id: '12',
-    title: 'Cliente L',
-  },
-  {
-    id: '13',
-    title: 'Cliente M',
-  },
-  {
-    id: '14',
-    title: 'Cliente N'
-  },
-  {
-    id: '15',
-    title: 'Cliente O'
-  }
-];
+import * as db from '../bd/bd.js';
+const DATA = [];
+let data = db.getLastCliente();
+//console.log(data[0].codigo);
+var obj = [];
+      let c = db.getLastCliente();
+      let b = db.getClientes();
+      let count = Object.keys(b).length;
+      for(let i=1;i<=c[0].id;i++){
+        let h = db.getEachClientes(i);
+        if(h[0]!=undefined){
+          obj.push({"codigo":i,"nome":h[0].nome});
+        }
+        //console.log(h[0].nome);
+      }
+      console.log(obj);
+for(let i=0;i<obj.length;i++){
+  let a = db.getEachRoupas(i);
+  //console.log(a[0]);
+  DATA.push({id:`${obj[i].codigo}` ,title:`${obj[i].nome}`})
+}
 
 type ItemProps = { title: string };
-
-const Item = ({ title }: ItemProps) => (
-  <View>
-    <TouchableOpacity style={styles.button}>
-      <Text style={styles.buttText}>{title}</Text>
-    </TouchableOpacity>
-  </View>
-);
 export function ModalC({handleClose}) {
+  function getCodigo({title}){
+    let a = db.getEachClienteNome(title);
+    console.log(a[0].id);
+    setCodigo(a[0].id);
+    console.log(codigo);
+    setModalECvisible(true);
+  }
+  const Item = ({title}: ItemProps) =>(
+    <View>
+      <TouchableOpacity style={styles.button} onPress={()=>getCodigo({title})}>
+          <Text style={styles.buttText}>{title}</Text>
+          </TouchableOpacity>
+    </View>
+  )
   return (
     <SafeAreaView style={styles.screen}>
       <View style={styles.content}>
@@ -80,7 +45,7 @@ export function ModalC({handleClose}) {
         <View style={styles.gencont}>
 
           <View style={styles.textInput}>
-            <TextInput style={styles.inputText} placeholder="Pesquisar venda..." placeholderTextColor={'#FFF'}>
+            <TextInput style={styles.inputText} placeholder="Pesquisar cliente..." placeholderTextColor={'#FFF'}>
             </TextInput>
           </View>
         
@@ -118,9 +83,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  buttText: {
-    fontSize: 20,
-    fontWeight: 'bold'
+  buttText:{
+    fontSize:20,
+    fontWeight:'bold'
   },
   textInput: {
     borderWidth: 1,

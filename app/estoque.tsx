@@ -9,10 +9,21 @@ const DATA = [];
 //fazer requisicao pro banco com axios por cliente e popular com for loop
 let data = db.getLastRoupa();
 //console.log(data[0].codigo);
-for(let i=1;i<=data[0].codigo;i++){
+var obj = [];
+      let c = db.getLastRoupa();
+      let b = db.getRoupas();
+      let count = Object.keys(b).length;
+      for(let i=1;i<=c[0].codigo;i++){
+        let h = db.getEachRoupas(i);
+        if(h[0]!=undefined){
+          obj.push({"codigo":i,"nome":h[0].nome});
+        }
+        //console.log(h[0].nome);
+      }
+for(let i=0;i<obj.length;i++){
   let a = db.getEachRoupas(i);
-  console.log(a[0]);
-  DATA.push({id:`${a[0].codigo}` ,title:`${a[0].nome}`})
+  //console.log(a[0]);
+  DATA.push({id:`${obj[i].codigo}` ,title:`${obj[i].nome}`})
 }
   /**
    *
